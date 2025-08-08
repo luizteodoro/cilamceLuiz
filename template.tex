@@ -18,7 +18,7 @@
 \usepackage{amsmath}   % dá suporte a \begin{split}, align, etc.
 \usepackage{amssymb}   % símbolos extras, \mathfrak, …
 \usepackage{bm}        % comando \bm{…} para negrito em modo matemático
-
+\usepackage{xcolor}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% My Additional Packages
@@ -206,7 +206,7 @@ To address the problem of flows interacting with multiple immersed solid bodies,
   \subsection{Kinematic measures and governing equations}\label{subsec:kinematicMeasures}
   % --------------------------------------------------------------------------
   
-    In the total Lagrangian description adopted for the solid, the reference configuration is always the initial $\Omega_0$. For the fluid, due to the recurrent remeshing in PFEM, the reference configuration $\Omega_r$ corresponds to the state at the instant preceding the current time step $t_{n+1}$, representing a partially updated Lagrangian description. In this section, all equations are written with variables carrying the subscript $r$, but interpreted according to each domain's own reference configuration.
+    In the total Lagrangian description adopted for the solid, the solid initial configuration is taken as reference ($\Omega_r=\Omega_0$). For the fluid, due to the recurrent remeshing in the PFEM, the reference configuration $\Omega_r$ needs to be updated, so that we adopt a partially updated Lagrangian description, setting the reference to the last known equilibrium configuration (solution from previous time step $n$) ($\Omega_r=\Omega_n$). In this section, all equations are written with variables carrying the subscript $r$, but shall be interpreted according to each domain's own reference configuration. This is only possible because for the considered fluid constitutive model, there is no strain energy storage. 
 
     The reference and current configurations are represented by the coordinates $\refPosition$ and $\ePosition$, respectively, and the deformation gradient tensor $\cChangeGradRef$ is then defined as:
     \begin{equation} \label{eq:defGrad} 
@@ -244,7 +244,7 @@ To address the problem of flows interacting with multiple immersed solid bodies,
   \subsection{Constitutive models}\label{subsec:constitutiveModels}
   % --------------------------------------------------------------------------
 
-    We adopt the SVK model for the solid phase, a hyperelastic formulation expressed in the stress-strain relation as:
+    We adopt the SVK hyperelastic model for the solids, expressed in the stress-strain relation as:
       \begin{equation}\label{eq:stressStrainSolid}
           \sPiolaStress = \mathbf{\mathfrak{C}} : \greenStrain_r \text{,}
       \end{equation}
@@ -264,7 +264,7 @@ To address the problem of flows interacting with multiple immersed solid bodies,
     \end{equation}
     where $\boldsymbol{\tau}$ is the deviatoric stress tensor, $p$ is the pressure.
 
-    The Herschel-Bulkley model includes three experimental parameters: the consistency index $k$, the yield stress $\tau_0$, and the flow behavior index $o$. To avoid numerical difficulties, we adopt the regularization proposed by \citet{Papanastasiou1987}, introducing a regularization parameter $m$. The deviatoric stress tensor is then given by:
+    The Herschel-Bulkley model includes three parameters that can be experimentally determined: the consistency index $k$, the yield stress $\tau_0$, and the flow behavior index $o$. To avoid numerical difficulties, we adopt the regularization proposed by \citet{Papanastasiou1987}, introducing a regularization parameter $m$. The deviatoric stress tensor is then given by:
     \begin{equation} \label{eq:HBP}
       \boldsymbol{\tau} = 2\left( k \left\| \dot{\boldsymbol{\varepsilon}} \right\|^{o-1} + \frac{\tau_0}{\left\| \dot{\boldsymbol{\varepsilon}} \right\|} \left( 1 - e^{-m \left\| \dot{\boldsymbol{\varepsilon}} \right\|} \right) \right) \boldsymbol{\dot{\varepsilon}} \text{,}
     \end{equation}
@@ -371,9 +371,9 @@ To address the problem of flows interacting with multiple immersed solid bodies,
 \subsection{Solid-solid contact: node-to-surface formulation}\label{subsec:solidSolidContact}
 % --------------------------------------------------------------------------
 
-  The solid-solid contact formulation proposed in this work comprises two main steps: contact detection via a node-to-surface technique and enforcement of the contact constraints using Lagrange multipliers. 
+  The solid-solid contact formulation adopted in this work comprises two main steps: contact detection via a node-to-surface technique and enforcement of the contact constraints using Lagrange multipliers. 
 
-  In the first step, it is necessary to define potential contact pairs, each consisting of one projectile node and a target surface. Each projectile node is represented solely by its position vector $\mathbf{y}_N$, while the points $\mathbf{y}_S$ on the target surface are obtained by interpolating the nodal coordinates of its element. To detect contact, these positions are also interpolated in dimensionless time. Contact occurs when the projectile trajectory intersects the target surface trajectory, determined by solving the nonlinear equation
+  In the first step, it is necessary to define potential contact pairs, each consisting of a projectile node and a target surface. Each projectile node is represented solely by its position vector $\mathbf{y}_N$, while the points $\mathbf{y}_S$ on the target surface are obtained by interpolating the nodal coordinates of the finite element surface where it is located. To detect contact, these positions are also interpolated in dimensionless time. Contact occurs when the projectile trajectory intersects the target surface trajectory, determined by solving the nonlinear equation
   \begin{equation}
   \mathbf{r}(\omega, \boldsymbol{\xi}) = \mathbf{y}_N^{t}(\omega) - \mathbf{y}_S^{t}(\omega, \boldsymbol{\xi}) = \mathbf{0} \text{,}
   \end{equation}
@@ -385,15 +385,15 @@ To address the problem of flows interacting with multiple immersed solid bodies,
   \end{equation}
   where $g_n$ measures the projected distance between the projectile node and the contact point on the target element, and $\mathbf{\bar{n}}(\boldsymbol{\xi})$ is the unit normal vector to the target surface at that point.  
 
-  The principle of stationary energy is then applied with respect to the Lagrange multipliers, the projectile node, and the target surface nodes, adding the corresponding contributions to the solid equilibrium equations \eqref{eq:full-solid-discretization}. A contact pair is deactivated when the contact force exceeds the adhesion force and is positive, thereby reducing the number of DOFs in the system. Both steps are performed at each time step after updating the solid positions, and when there is a change of contact state, the Newton-Raphson procedure is restarted before proceeding to the next time step.
+  The energy conservation is then applied with respect to the Lagrange multipliers, the projectile node, and the target surface nodes, adding the corresponding contributions to the solid equilibrium equations \eqref{eq:full-solid-discretization}. A contact pair is deactivated when the contact force exceeds the adhesion force and is positive, thereby reducing the number of DOFs in the system. Both steps are performed at each time step after updating the solid positions, and when there is a change of contact state, the Newton-Raphson procedure is restarted before proceeding to the next time step.
 
-  In the present work, due to the large number of solid bodies, additional techniques are required to make the computational cost viable. Since each body contains many nodes and surface elements, assigning all nodes as potential projectiles for all surfaces would be unfeasible. To address this, a two-layer search strategy is employed.
+  In the present work, due to the large number of solid bodies, additional techniques are required to make the computational cost viable. Since each body may contain many nodes and surface elements, assigning all nodes as potential projectiles for all surfaces would be unfeasible. To address this, a two-layer search strategy is employed.
 
   In the first layer, neighboring inclusions are identified by enclosing all solid bodies within a bounding box, allowing each node to be assigned an inclusion tag. In the second layer, a container is filled for each node with nearby target elements. This is achieved by subdividing the bounding box into smaller cells and using the neighboring inclusion information to restrict the search to relevant elements.
 
   Additionally, the generation and distribution of multiple solid bodies within the fluid domain follow the algorithm proposed by \citet{Wriggers2006}. This procedure comprises two stages: (i) solid generation, considering random mesoscopic geometries, and (ii) random and uniform placement within the domain. For this purpose, Wriggers and Moftah (2006) proposed the take-and-place method, in which solids are positioned one by one at random coordinates, ensuring no overlap and full containment within the domain.
 
-\subsection{Monolithic coupling for fluid-solid interaction}\label{subsec:fsi}
+\subsection{Monolithic fluid-solid coupling}\label{subsec:fsi}
 % --------------------------------------------------------------------------
 
   In the monolithic coupling for FSI, the motions of the fluid and solid are solved in an integrated manner within a single system. The interaction is enforced through the contributions of both domains at the interface nodes. During the pre-processing stage, it is necessary to mark the potential interface nodes so that, after the intrinsic remeshing of the PFEM, interaction can occur if the fluid and solid come into proximity during the simulation.
@@ -401,7 +401,7 @@ To address the problem of flows interacting with multiple immersed solid bodies,
 % --------------------------------------------------------------------------
 \section{Numerical results}\label{sec:numericalResults}
 % --------------------------------------------------------------------------
-
+\textcolor{red}{Apenas separe os dois exemplos em subseções e reorganize o texto...}
   In \citet{Teodoro2024}, the formulation for Bingham-Papanastasiou fluid was validated using experimental and numerical data from the literature. Since the implementation of the HBP model is similar, we present here only a analytical verification by simulating a well-known benchmark: the Poiseuille flow. The configuration parameters are: channel height $h = 0.02 \ \text{m}$, density $\rho = 1000.0 \ \text{kg/m}^3$, consistency index $K = 10.0 \ \text{Pa$\cdot$s}$, regularization parameter $1000.0$, body force (in the horizontal direction) $b_1 = 20000 \ \text{N/m}^3$, element characteristic length $h_e = 0.0005 \ \text{m}$, tolerance $10^{-6}$, number of steps $2000$, and time step $\Delta t = 0.00005 \ \text{s}$. Figure \ref{poiseuille} shows the good agreement between the analytical solution and the numerical results.
   \begin{figure}[!ht]
   \begin{center}
