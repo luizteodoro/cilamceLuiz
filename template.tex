@@ -436,11 +436,19 @@ To address the problem of flows interacting with multiple immersed solid bodies,
 % --------------------------------------------------------------------------
 \section{Conclusions}\label{sec:conclusion}
 % --------------------------------------------------------------------------
+This work presented a monolithic computational framework for simulating free-surface non-Newtonian fluid flows with multiple immersed elastic solids. The proposed methodology combines a particle-position-based PFEM formulation for the fluid phase with a total Lagrangian finite element approach for the solid phase with nodal positions as primary variables. This unified treatment ensures consistent and direct coupling between the fluid and solid phases, while a node-to-surface contact algorithm with Lagrange multipliers handles contact interactions between immersed solids. The Herschel-Bulkley-Papanastasiou (HBP) model was employed to describe the non-Newtonian fluid behavior, and the Saint-Venant-Kirchhoff (SVK) model was used for the elastic solids. The Generalized-$\alpha$ time-marching scheme provided second-order accuracy and controlled numerical dissipation for enhanced stability.
 
-  Separately, two benchmarks verified the correct implementation of the HBP constitutive model and the node-to-surface contact algorithm. By combining these two components with the monolithic fluid-solid coupling, the framework proposed in this work for simulating free-surface incompressible non-Newtonian flows with multiple immersed solid bodies shows strong potential for applications such as modeling concrete flow in the mesoscale, where the mortar is treated as a non-Newtonian fluid and the coarse aggregates as immersed elastic solid.
+Numerical results demonstrated the effectiveness of the proposed framework. The Poiseuille flow benchmark validated the implementation of the HBP model, agreement with analytical solutions. The contact algorithm was verified through a dynamic impact test of two elastic bars, with numerical results closely matching theoretical predictions. Finally, a qualitative simulation of a non-Newtonian fluid cube containing multiple immersed solids under gravity showcased the robustness of the monolithic coupling and the solid-solid contact formulation.
 
+The proposed methodology shows strong potential for applications such as fresh concrete flow simulations, where the mortar can be modeled as a non-Newtonian fluid and coarse aggregates as immersed solids. Future work will focus on extending the framework to include more complex constitutive models for both phases, optimizing computational efficiency for large-scale problems, and validating the method against experimental data for industrial applications.
+
+ 
 \vspace{20pt}
-\noindent \textbf{Acknowledgements.} This study was financed in part by the Coordenação de Aperfeiçoamento de Pessoal de Nível Superior - Brasil (CAPES) - Finance Code 001, and by Brazilian National Council for Research and Technological Development (CNPq) - grant - 314045/2023-6. The authors would like to thank them for the financial support given to this research. The authors are also grateful for the infrastructure of the Department of Structures SET/EESC and the University of Sao Paulo.
+\noindent \textbf{Acknowledgements.} The authors acknowledge the
+financial support provided by the Coordination for the Improvement of Higher
+Education Personnel (CAPES) -- Finance Code 001, by the National Council for
+Scientific and Technological Development (CNPq) -- grants \textcolor{red}{Colocar o número do processo da sua bolsa} and
+314045/2023-6, and São Paulo Research Foundation (FAPESP) -- grant 2024/05554-9.
 \vspace{12pt}
 
 %--------------------------------------------------------------------------
