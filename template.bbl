@@ -1,0 +1,78 @@
+\begin{thebibliography}{}
+
+\bibitem[O{\~{n}}ate et~al., 2014]{Onate2014}
+E. O{\~{n}}ate, M.~A. Celigueta, S. Latorre, G. Casas, R. Rossi, and J. Rojek.
+\newblock {Lagrangian analysis of multiscale particulate flows with the particle finite element method}.
+\newblock {\em Computational Particle Mechanics}, vol. 1, n. 1, pp. 85--102, 2014.
+
+\bibitem[Idelsohn et~al., 2004]{Idelsohn2004}
+S.~R. Idelsohn, E. Onate, and F. {Del Pin}.
+\newblock {The particle finite element method: a powerful tool to solve incompressible flows with free-surfaces and breaking waves}.
+\newblock {\em International Journal for Numerical Methods in Engineering}, vol. 61, n. 7, pp. 964--989, 2004.
+
+\bibitem[Avancini et~al., 2024]{Avancini2024}
+G. Avancini, A. Franci, S. Idelsohn, and R.~A. Sanches.
+\newblock {A particle-position-based finite element formulation for free-surface flows with topological changes}.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering}, vol. 429, pp. 117118, 2024.
+
+\bibitem[Teodoro et~al., 2024]{Teodoro2024}
+L.~F.~H. Teodoro, G. Avancini, and R.~A.~K. Sanches.
+\newblock A position-based pfem formulation for free-surface non-newtonian flows with application to fresh concrete.
+\newblock {\em Ibero-Latin American Congress on Computational Methods in Engineering (CILAMCE)}, vol. , 2024.
+
+\bibitem[Papanastasiou, 1987]{Papanastasiou1987}
+T.~C. Papanastasiou.
+\newblock {Flows of Materials with Yield}.
+\newblock {\em Journal of Rheology}, vol. 31, n. 5, pp. 385--404, 1987.
+
+\bibitem[Chung and Hulbert, 1993]{Chung1993}
+J. Chung and G.~M. Hulbert.
+\newblock {A Time Integration Algorithm for Structural Dynamics With Improved Numerical Dissipation: The Generalized-$\alpha$ Method}.
+\newblock {\em Journal of Applied Mechanics}, vol. 60, n. 2, pp. 371--375, 1993.
+
+\bibitem[Babu{\v{s}}ka, 1973]{Babuska1973}
+I. Babu{\v{s}}ka.
+\newblock {The finite element method with Lagrangian multipliers}.
+\newblock {\em Numerische Mathematik}, vol. 20, n. 3, pp. 179--192, 1973.
+
+\bibitem[{Brezzi, F.}, 1974]{Brezzi1974}
+ {Brezzi, F.}
+\newblock On the existence, uniqueness and approximation of saddle-point problems arising from lagrangian multipliers.
+\newblock {\em R.A.I.R.O. Analyse Numérique}, vol. 8, pp. 129--151, 1974.
+
+\bibitem[Babuška and Narasimhan, 1997]{BABUSKA1997183}
+I. Babuška and R. Narasimhan.
+\newblock The babuška-brezzi condition and the patch test: an example.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering}, vol. 140, n. 1, pp. 183--199, 1997.
+
+\bibitem[Tezduyar, 1991]{tezduyar1991}
+T.~E. Tezduyar.
+\newblock Stabilized finite element formulations for incompressible flow computations.
+\newblock {\em Advances in applied mechanics}, vol. 28, pp. 1--44, 1991.
+
+\bibitem[Tezduyar et~al., 1992]{TEZDUYAR1992221}
+T. Tezduyar, S. Mittal, S. Ray, and R. Shih.
+\newblock Incompressible flow computations with stabilized bilinear and linear equal-order-interpolation velocity-pressure elements.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering}, vol. 95, n. 2, pp. 221--242, 1992.
+
+\bibitem[Cremonesi et~al., 2020]{Cremonesi2020}
+M. Cremonesi, A. Franci, S. Idelsohn, and E. O{\~{n}}ate.
+\newblock {A State of the Art Review of the Particle Finite Element Method (PFEM)}.
+\newblock {\em Archives of Computational Methods in Engineering}, vol. 27, n. 5, pp. 1709--1735, 2020.
+
+\bibitem[Edelsbrunner and M{\"{u}}cke, 1994]{Edelsbrunner1994}
+H. Edelsbrunner and E.~P. M{\"{u}}cke.
+\newblock {Three-dimensional alpha shapes}.
+\newblock {\em ACM Transactions on Graphics (TOG)}, vol. 13, n. 1, pp. 43--72, 1994.
+
+\bibitem[Si, 2015]{Si2015}
+H. Si.
+\newblock Tetgen, a delaunay-based quality tetrahedral mesh generator.
+\newblock {\em ACM Trans. Math. Softw.}, vol. 41, n. 2, 2015.
+
+\bibitem[Wriggers and Moftah, 2006]{Wriggers2006}
+P. Wriggers and S.~O. Moftah.
+\newblock {Mesoscale models for concrete: Homogenisation and damage behaviour}.
+\newblock {\em Finite Elements in Analysis and Design}, vol. 42, n. 7, pp. 623--636, 2006.
+
+\end{thebibliography}

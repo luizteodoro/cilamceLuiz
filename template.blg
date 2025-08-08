@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: template.aux
+The style file: ./bib-cilamce.bst
+Database file #1: bibliography.bib
+Warning--string name "r2" is undefined
+--line 554 of file bibliography.bib
+You've used 15 entries,
+            1926 wiz_defined-function locations,
+            600 strings with 6950 characters,
+and the built_in function-call counts, 4690 in all, are:
+= -- 424
+> -- 136
+< -- 9
++ -- 54
+- -- 37
+* -- 462
+:= -- 782
+add.period$ -- 45
+call.type$ -- 15
+change.case$ -- 60
+chr.to.int$ -- 15
+cite$ -- 15
+duplicate$ -- 193
+empty$ -- 394
+format.name$ -- 60
+if$ -- 911
+int.to.chr$ -- 1
+int.to.str$ -- 15
+missing$ -- 15
+newline$ -- 78
+num.names$ -- 30
+pop$ -- 36
+preamble$ -- 1
+purify$ -- 60
+quote$ -- 0
+skip$ -- 117
+stack$ -- 0
+substring$ -- 416
+swap$ -- 30
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 45
+warning$ -- 0
+while$ -- 37
+width$ -- 0
+write$ -- 197
+(There was 1 warning)
